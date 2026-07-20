@@ -7,6 +7,32 @@
 
 ---
 
+Du siehst zwei Netzwerk-Adressen:
+Adresse	Bedeutung
+127.0.0.1	Das ist dein Mac, der mit sich selbst redet (Loopback – kannst du ignorieren)
+
+10.0.1.184	Das ist die echte IP deines Macs im WLAN! ✅
+🔑 Die wichtige Erkenntnis:
+Dein Heimnetz verwendet nicht 192.168.1.x (wie bei Swisscom üblich), sondern:
+
+10.0.1.x mit Broadcast 10.0.1.255
+
+Das heisst: Dein Router vergibt Adressen im Bereich 10.0.1.x.
+
+✅ Dein korrekter Scan-Befehl lautet also:
+bash
+
+
+sudo arp-scan -I en0 10.0.1.0/24 | grep -i raspberry
+Oder ohne Filter (alle Geräte sehen):
+
+bash
+
+
+sudo arp-scan -I en0 10.0.1.0/24
+📦 Zusammenfassung in einem Satz:
+Dein Mac hängt im Netz 10.0.1.x – du musst diesen Bereich scannen, nicht 192.168.1.x
+
 ## 1. arp-scan – Der schnelle Netzwerk-Überblick
 
 ### Grundprinzip
